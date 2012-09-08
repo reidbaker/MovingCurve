@@ -23,17 +23,6 @@ public class MovingCurve extends PApplet {
 
 
         initCurves();
-
-//        points.add(one);
-//        points.add(two);
-//        points.add(three);
-//        points.add(four);
-//
-//        stop.add(new Point('1', 100, 300));
-//        stop.add(new Point('2', 200, 350));
-//        stop.add(new Point('3', 700, 200));
-//        stop.add(new Point('4', 500, 600));
-
         smooth();
 
 
@@ -67,13 +56,6 @@ public class MovingCurve extends PApplet {
         	n.draw(this);
         }
 
-//        begin.draw_trace(this);
-//        end.draw_trace(this);
-//
-//        PVector A = MathMagic.neville(t, begin.getCtrl_pnts());
-//        PVector B = MathMagic.neville(t, end.getCtrl_pnts());
-//        PVector live = MathMagic.neville(t, A, B);
-//        ellipse(live.x, live.y, 30, 30);
         curves[0].draw_trace(this);
         curves[1].draw_trace(this);
 
