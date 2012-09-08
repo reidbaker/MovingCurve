@@ -6,10 +6,10 @@ import processing.core.PVector;
 public class MovingCurve extends PApplet {
 
     ArrayList<Point> start = new ArrayList<Point>();
-    Point one = new Point(this, 200, 200);
-    Point two = new Point(this, 200, 500);
-    Point three = new Point(this, 100, 400);
-    Point four = new Point(this, 100, 600);
+    Point one = new Point('a', 200, 200);
+    Point two = new Point('b', 200, 500);
+    Point three = new Point('c', 100, 400);
+    Point four = new Point('d', 100, 600);
     ArrayList<Point> stop = new ArrayList<Point>();
 
     float t = .5f;
@@ -33,10 +33,10 @@ public class MovingCurve extends PApplet {
         start.add(three);
         start.add(four);
 
-        stop.add(new Point(this, 100, 300));
-        stop.add(new Point(this, 200, 350));
-        stop.add(new Point(this, 500, 600));
-        stop.add(new Point(this, 700, 200));
+        stop.add(new Point('1', 100, 300));
+        stop.add(new Point('2', 200, 350));
+        stop.add(new Point('3', 700, 200));
+        stop.add(new Point('4', 500, 600));
         smooth();
         
         begin = new Neville(start.toArray(new Point[] {}));
@@ -47,7 +47,7 @@ public class MovingCurve extends PApplet {
         background(GRAY);
 
         for(int i=0; i < start.size(); i++){
-            start.get(i).display();
+            start.get(i).display(this);
         }
 
         begin.draw_trace(this);
@@ -59,8 +59,28 @@ public class MovingCurve extends PApplet {
         ellipse(live.x, live.y, 30, 30);
     }
 
-    public void mousePressed() {
-        //TODO find closest point and move it
+    private Point grabbedPoint;
+
+    public void mouseDragged() {
+        if (grabbedPoint == null) {
+            float maxDistance = 400000;
+            for (Point p: start) {
+                float distance = p.distance(mouseX, mouseY);
+                if (distance < maxDistance) {
+                    maxDistance = distance;
+                    grabbedPoint = p;
+                }
+            }
+        }
+
+        grabbedPoint.move(mouseX, mouseY);
+
+    }
+
+    @Override
+    public void mouseReleased() {
+        grabbedPoint = null;
+
     }
 
 }

@@ -27,7 +27,7 @@ public class Neville {
         this.ctrl_pnts = pts;
     }
 
-	public PVector[] getCtrl_pnts() {
+    public PVector[] getCtrl_pnts() {
         return ctrl_pnts;
     }
 
