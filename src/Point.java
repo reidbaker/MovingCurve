@@ -18,8 +18,10 @@ public class Point {
 
     public float distance(Point B){
         //TODO return distance from here to B
-        System.out.println("Not Yet Implimented");
-        return 0;
+        float xDistance = B.getXLoc() - getXLoc();
+        float yDistance = B.getYLoc() - getYLoc();
+        float distance = (float) Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+        return distance;
     }
 
     public float midpoint(Point B){
