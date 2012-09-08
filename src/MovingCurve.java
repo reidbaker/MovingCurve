@@ -12,14 +12,15 @@ public class MovingCurve extends PApplet {
     Point four = new Point('d', 100, 600);
     ArrayList<Point> stop = new ArrayList<Point>();
 
-    float t = .5f;
+    float t = 0.0f;
+    float t_step = .05f;
     private static final int GRAY = 88;
-    
+
+    Neville[] curves = new Neville[2];
     Neville begin;
     Neville currentNeville;
     Neville end;
 
-    Neville[] curves = new Neville[4];
 
     public static void main(String[] args) {
         PApplet.main(new String[] { "--present", "MovingCurve" });
@@ -38,9 +39,11 @@ public class MovingCurve extends PApplet {
         stop.add(new Point('3', 700, 200));
         stop.add(new Point('4', 500, 600));
         smooth();
-        
+
         begin = new Neville(start.toArray(new Point[] {}));
         end = new Neville(stop.toArray(new Point[] {}));
+        curves[0] = begin;
+        curves[1] = end;
     }
 
     public void draw() {
@@ -53,10 +56,28 @@ public class MovingCurve extends PApplet {
         begin.draw_trace(this);
         end.draw_trace(this);
 
-        PVector A = MathMagic.neville(t, begin.getCtrl_pnts());
-        PVector B = MathMagic.neville(t, end.getCtrl_pnts());
-        PVector live = MathMagic.neville(t, A, B);
-        ellipse(live.x, live.y, 30, 30);
+        PVector A = MathMagic.neville(t, curves[0].getCtrl_pnts());
+        PVector B = MathMagic.neville(t, curves[1].getCtrl_pnts());
+        PVector[] live = new PVector[]{A, B};
+        draw_solid_curve(live);
+        if (t < 3){
+            t += t_step;
+        }
+        else{
+            t = 0;
+        }
+    }
+
+    public void draw_solid_curve(PVector[] ctrl_pnts){
+        beginShape();
+        stroke(0xFF4499bb);
+        strokeWeight(4);
+        noFill();
+        for (float i = 0; i <= (ctrl_pnts.length - 1); i += .06) {
+            PVector pt = MathMagic.neville(i, ctrl_pnts);
+            curveVertex(pt.x, pt.y);
+        }
+        endShape();
     }
 
     private Point grabbedPoint;
