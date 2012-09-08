@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PVector;
 
 public class MovingCurve extends PApplet {
 
@@ -9,7 +10,9 @@ public class MovingCurve extends PApplet {
     Point two = new Point(this, 200, 500);
     Point three = new Point(this, 100, 400);
     Point four = new Point(this, 100, 600);
+    ArrayList<Point> stop = new ArrayList<Point>();
 
+    float t = .5f;
     private static final int GRAY = 88;
     
     Neville begin;
@@ -28,7 +31,6 @@ public class MovingCurve extends PApplet {
         start.add(three);
         start.add(four);
 
-        ArrayList<Point> stop = new ArrayList<Point>();
         stop.add(new Point(this, 100, 300));
         stop.add(new Point(this, 200, 350));
         stop.add(new Point(this, 500, 600));
@@ -37,7 +39,6 @@ public class MovingCurve extends PApplet {
         
         begin = new Neville(start.toArray(new Point[] {}));
         end = new Neville(stop.toArray(new Point[] {}));
-        currentNeville = new Neville(start.toArray(new Point[] {}));
     }
 
     public void draw() {
@@ -49,7 +50,6 @@ public class MovingCurve extends PApplet {
 
         begin.draw_trace(this);
         end.draw_trace(this);
-
     }
 
     public void mousePressed() {
