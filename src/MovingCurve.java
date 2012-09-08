@@ -19,6 +19,8 @@ public class MovingCurve extends PApplet {
     Neville currentNeville;
     Neville end;
 
+    Neville[] curves = new Neville[4];
+
     public static void main(String[] args) {
         PApplet.main(new String[] { "--present", "MovingCurve" });
     }
