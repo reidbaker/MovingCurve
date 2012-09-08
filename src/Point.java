@@ -1,20 +1,25 @@
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PVector;
 
 public class Point {
     private PApplet p;
-    private float xLoc;
-    private float yLoc;
+    private PVector pos;
+//    private float xLoc;
+//    private float yLoc;
     private int size = 30;
 
     public Point(PApplet p, float x, float y) {
-        this.p = p;
-        this.xLoc = x;
-        this.yLoc = y;
+        this(p, new PVector(x,y));
     }
 
-    public void display(){
+    public Point(PApplet p, PVector pos) {
+		this.p = p;
+		this.pos = pos;
+	}
+
+	public void display(){
         p.ellipse(getXLoc(), getYLoc(), size, size);
     }
 
@@ -41,21 +46,26 @@ public class Point {
     }
 
     public float getYLoc() {
-        return yLoc;
+        return this.pos.y;
     }
     public void setYLoc(float y) {
-        this.yLoc = y;
+        this.pos.y = y;
     }
     public float getXLoc() {
-        return xLoc;
+        return this.pos.x;
     }
     public void setXLoc(float x) {
-        this.xLoc = x;
+        this.pos.x = x;
     }
+    
     public void setXY(float x, float y){
-        this.xLoc = x;
-        this.yLoc = y;
+        this.pos.x = x;
+        this.pos.y = y;
     }
+    
+    public PVector getPos() {
+		return pos;
+	}
 
     public int getSize() {
         return size;
