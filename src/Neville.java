@@ -22,7 +22,7 @@ public class Neville {
 		}
 	}
 
-	void draw(PApplet canvas) {
+	void display(PApplet canvas) {
 
 		draw_trace(canvas);
 

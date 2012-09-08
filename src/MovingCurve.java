@@ -4,47 +4,68 @@ import processing.core.PApplet;
 
 public class MovingCurve extends PApplet {
 
-    ArrayList<Point> points = new ArrayList<Point>();
-    Point one = new Point(this, 200, 200);
-    Point two = new Point(this, 200, 500);
-    Point three = new Point(this, 100, 400);
-    Point four = new Point(this, 100, 600);
+	ArrayList<Point> points = new ArrayList<Point>();
+	Point one = new Point('a', 200, 200);
+	Point two = new Point('b', 200, 500);
+	Point three = new Point('c', 100, 400);
+	Point four = new Point('d', 100, 600);
 
-    Point test = new Point(this, 400, 360);
-    private static final int GRAY = 88;
-    
-    Neville neville;
+	Point test = new Point('t', 400, 360);
+	private static final int GRAY = 88;
 
-    public static void main(String[] args) {
-        PApplet.main(new String[] { "--present", "MovingCurve" });
-    }
+	Neville neville;
 
-    public void setup() {
-        size(800, 800);
-        frameRate(30);
-        points.add(one);
-        points.add(two);
-        points.add(three);
-        points.add(four);
-        points.add(new Point(this, 600, 400));
-        smooth();
-        
-        neville = new Neville(points.toArray(new Point[] {}));
-    }
+	public static void main(String[] args) {
+		PApplet.main(new String[] { "--present", "MovingCurve" });
+	}
 
-    public void draw() {
-        background(GRAY);
+	public void setup() {
+		size(800, 800);
+		frameRate(30);
+		points.add(one);
+		points.add(two);
+		points.add(three);
+		points.add(four);
+		points.add(new Point('e', 600, 400));
+		smooth();
 
-        for(int i=0; i < points.size(); i++){
-            points.get(i).display();
-        }
+		neville = new Neville(points.toArray(new Point[] {}));
+	}
 
-        neville.draw(this);
+	public void draw() {
+		background(GRAY);
 
-    }
+		for(int i=0; i < points.size(); i++){
+			points.get(i).display(this);
+		}
 
-    public void mousePressed() {
-        //TODO find closest point and move it
-    }
+		neville.display(this);
+
+	}
+
+
+	private Point grabbedPoint;
+
+	public void mouseDragged() {
+		if (grabbedPoint == null) {
+			float maxDistance = 400000;
+			for (Point p: points) {
+				float distance = p.distance(mouseX, mouseY);
+				if (distance < maxDistance) {
+					maxDistance = distance;
+					grabbedPoint = p;
+				}
+			}
+		}
+
+		grabbedPoint.move(mouseX, mouseY);
+
+	}
+
+	@Override
+	public void mouseReleased() {
+		grabbedPoint = null;
+
+	}
 
 }
