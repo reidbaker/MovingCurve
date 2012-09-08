@@ -8,7 +8,7 @@ public class Point {
 	private char label;
 	//    private float xLoc;
 	//    private float yLoc;
-	private int size = 30;
+	private int size = 20;
 
 	private int pointColor = 0xFFFFFFFF;
 	private int labelColor = 0xFF000000;
@@ -32,7 +32,7 @@ public class Point {
 
 		canvas.fill(labelColor);
 		canvas.textAlign(canvas.CENTER, canvas.CENTER);
-		canvas.text(label, 0, 0);
+		canvas.text(label, 0, -2); // hacky!
 
 		canvas.popMatrix();
 	}

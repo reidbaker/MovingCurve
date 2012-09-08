@@ -33,7 +33,7 @@ public class Neville {
 
 	void draw(PApplet canvas) {
 		draw_trace(canvas);
-        draw_animated_curve(canvas);
+//        draw_animated_curve(canvas);
 	}
 
 	public void draw_solid_curve(PApplet canvas){

@@ -18,22 +18,11 @@ public class MovingCurve extends PApplet {
     }
 
     public void setup() {
-        size(800, 800);
+        size(800, 500);
         frameRate(30);
 
 
-        int numCurves = 5;
-        int ctrlPoints = 5;
-
-        curves = new Neville[numCurves];
-        for (int i = 0; i < numCurves; i++	) {
-        	Point[] pts = new Point[ctrlPoints];
-        	for (int j = 0; j < ctrlPoints; j++) {
-        		Point p = pts[j] = new Point('x', 30 + 100*i, 30 + 100*j);
-        		points.add(p);
-        	}
-        	curves[i] = new Neville(pts);
-        }
+        initCurves();
 
 //        points.add(one);
 //        points.add(two);
@@ -49,6 +38,23 @@ public class MovingCurve extends PApplet {
 
 
     }
+
+	protected void initCurves() {
+		int numCurves = 4;
+        int ctrlPoints = 4;
+
+        points.clear();
+        
+        curves = new Neville[numCurves];
+        for (int i = 0; i < numCurves; i++	) {
+        	Point[] pts = new Point[ctrlPoints];
+        	for (int j = 0; j < ctrlPoints; j++) {
+        		Point p = pts[j] = new Point('x', 30 + 100*i, 30 + 100*j);
+        		points.add(p);
+        	}
+        	curves[i] = new Neville(pts);
+        }
+	}
 
     public void draw() {
         background(GRAY);
@@ -89,10 +95,14 @@ public class MovingCurve extends PApplet {
         stroke(0xFF4499bb);
         strokeWeight(4);
         noFill();
-        for (float i = 0; i <= (ctrl_pnts.length - 1); i += .06) {
-            PVector pt = MathMagic.neville(i, ctrl_pnts);
+        PVector pt = MathMagic.neville(0, ctrl_pnts);
+        curveVertex(pt.x, pt.y);
+        for (float i = 0; i <= (ctrl_pnts.length - 1); i += .01) {
+            pt = MathMagic.neville(i, ctrl_pnts);
             curveVertex(pt.x, pt.y);
         }
+        pt = MathMagic.neville(ctrl_pnts.length-1, ctrl_pnts);
+        curveVertex(pt.x, pt.y);
         endShape();
     }
 
@@ -120,4 +130,10 @@ public class MovingCurve extends PApplet {
 
     }
 
+    @Override
+    public void keyPressed() {
+    	if (key == 'c') {
+    		initCurves();
+    	}
+    }
 }
