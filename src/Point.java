@@ -72,12 +72,12 @@ public class Point {
     public void setXLoc(float x) {
         this.pos.x = x;
     }
-    
+
     public void setXY(float x, float y){
         this.pos.x = x;
         this.pos.y = y;
     }
-    
+
     public PVector getPos() {
 		return pos;
 	}

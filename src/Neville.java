@@ -36,7 +36,7 @@ public class Neville {
 			canvas.ellipse(0, 0, 2, 2);
 
 			canvas.popMatrix();
-		} 
+		}
 
 
 		t += t_range[1]/canvas.frameRate/seconds;
