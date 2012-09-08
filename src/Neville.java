@@ -23,6 +23,14 @@ public class Neville {
 		}
 	}
 
+    Neville(PVector ... pts) {
+        this.ctrl_pnts = pts;
+    }
+
+	public PVector[] getCtrl_pnts() {
+        return ctrl_pnts;
+    }
+
 	void draw(PApplet canvas) {
 		draw_trace(canvas);
         draw_animated_curve(canvas);
@@ -47,7 +55,7 @@ public class Neville {
         }
     }
 
-    private void draw_animated_curve(PApplet canvas) {
+    public void draw_animated_curve(PApplet canvas) {
         canvas.strokeWeight(2);
         for (float i = t_range[0]; i <= t*(ctrl_pnts.length - 1); i += t_step) {
 			PVector pt = MathMagic.neville(i, ctrl_pnts);
