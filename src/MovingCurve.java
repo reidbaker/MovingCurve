@@ -5,22 +5,11 @@ import processing.core.PVector;
 
 public class MovingCurve extends PApplet {
 
-    ArrayList<Point> start = new ArrayList<Point>();
-    Point one = new Point('a', 200, 200);
-    Point two = new Point('b', 200, 500);
-    Point three = new Point('c', 100, 400);
-    Point four = new Point('d', 100, 600);
-    ArrayList<Point> stop = new ArrayList<Point>();
-    
     ArrayList<Point> points = new ArrayList<Point>();
 
     float t = 0.0f;
     float t_step = .05f;
     private static final int GRAY = 88;
-
-    Neville begin;
-    Neville currentNeville;
-    Neville end;
 
     Neville[] curves;
 
@@ -31,11 +20,11 @@ public class MovingCurve extends PApplet {
     public void setup() {
         size(800, 800);
         frameRate(30);
-        
-        
-        int numCurves = 4;
-        int ctrlPoints = 4;
-        
+
+
+        int numCurves = 5;
+        int ctrlPoints = 5;
+
         curves = new Neville[numCurves];
         for (int i = 0; i < numCurves; i++	) {
         	Point[] pts = new Point[ctrlPoints];
@@ -45,7 +34,7 @@ public class MovingCurve extends PApplet {
         	}
         	curves[i] = new Neville(pts);
         }
-       
+
 //        points.add(one);
 //        points.add(two);
 //        points.add(three);
@@ -55,9 +44,9 @@ public class MovingCurve extends PApplet {
 //        stop.add(new Point('2', 200, 350));
 //        stop.add(new Point('3', 700, 200));
 //        stop.add(new Point('4', 500, 600));
-        
+
         smooth();
-        
+
 
     }
 
@@ -67,7 +56,7 @@ public class MovingCurve extends PApplet {
         for (Point p: points) {
         	p.display(this);
         }
-        
+
         for (Neville n: curves) {
         	n.draw(this);
         }
@@ -82,11 +71,12 @@ public class MovingCurve extends PApplet {
         curves[0].draw_trace(this);
         curves[1].draw_trace(this);
 
-        PVector A = MathMagic.neville(t, curves[0].getCtrl_pnts());
-        PVector B = MathMagic.neville(t, curves[1].getCtrl_pnts());
-        PVector[] live = new PVector[]{A, B};
+        PVector[] live = new PVector[curves.length];
+        for(int i = 0; i < curves.length; i++){
+            live[i] = MathMagic.neville(t, curves[i].getCtrl_pnts());
+        }
         draw_solid_curve(live);
-        if (t < 3){
+        if (t < curves.length-1){
             t += t_step;
         }
         else{
