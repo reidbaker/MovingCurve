@@ -31,4 +31,8 @@ public class MovingCurve extends PApplet {
         }
     }
 
+    public void mousePressed() {
+        //TODO find closest point and move it
+    }
+
 }
