@@ -9,9 +9,10 @@ public class Neville {
 			0, 1
 	};
 
-	float trace_step = .05f;
+	float trace_step = .05f; // gap between white dots in time
 	float t = 0;
-	float t_step = .005f;
+	float t_step = .005f; // gap between moving dots in time
+	
 	int seconds = 5; // how long in seconds the curve should take to complete
 
 	Neville(Point ... pts) {
@@ -29,8 +30,8 @@ public class Neville {
 			PVector pt = MathMagic.neville(i, ctrl_pnts);
 
 			canvas.pushMatrix();
+			
 			canvas.translate(pt.x, pt.y);
-
 			canvas.fill(path_color);
 			canvas.noStroke();
 			canvas.ellipse(0, 0, 2, 2);

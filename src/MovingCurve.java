@@ -12,6 +12,8 @@ public class MovingCurve extends PApplet {
 
     Point test = new Point(this, 400, 360);
     private static final int GRAY = 88;
+    
+    Neville neville;
 
     public static void main(String[] args) {
         PApplet.main(new String[] { "--present", "MovingCurve" });
@@ -26,6 +28,8 @@ public class MovingCurve extends PApplet {
         points.add(four);
         points.add(new Point(this, 600, 400));
         smooth();
+        
+        neville = new Neville(points.toArray(new Point[] {}));
     }
 
     public void draw() {
@@ -35,7 +39,7 @@ public class MovingCurve extends PApplet {
             points.get(i).display();
         }
 
-        new Neville(points.toArray(new Point[] {})).draw(this);
+        neville.draw(this);
 
     }
 
