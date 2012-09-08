@@ -50,6 +50,11 @@ public class MovingCurve extends PApplet {
 
         begin.draw_trace(this);
         end.draw_trace(this);
+
+        PVector A = MathMagic.neville(t, begin.getCtrl_pnts());
+        PVector B = MathMagic.neville(t, end.getCtrl_pnts());
+        PVector live = MathMagic.neville(t, A, B);
+        ellipse(live.x, live.y, 30, 30);
     }
 
     public void mousePressed() {
