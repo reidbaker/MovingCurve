@@ -9,7 +9,8 @@ public class MovingCurve extends PApplet {
     Point two = new Point(this, 200, 500);
     Point three = new Point(this, 100, 400);
     Point four = new Point(this, 100, 600);
-    
+
+    Point test = new Point(this, 400, 360);
     private static final int GRAY = 88;
 
     public static void main(String[] args) {
@@ -18,6 +19,7 @@ public class MovingCurve extends PApplet {
 
     public void setup() {
         size(800, 800);
+        frameRate(30);
         points.add(one);
         points.add(two);
         points.add(three);
@@ -28,13 +30,13 @@ public class MovingCurve extends PApplet {
 
     public void draw() {
         background(GRAY);
-        
+
         for(int i=0; i < points.size(); i++){
             points.get(i).display();
         }
-        
+
         new Neville(points.toArray(new Point[] {})).draw(this);
-        
+
     }
 
     public void mousePressed() {

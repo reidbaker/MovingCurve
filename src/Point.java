@@ -37,12 +37,27 @@ public class Point {
         return 0;
     }
 
-    public Point closestPoint(Point A, ArrayList<Point> points){
-        Point currentClosest = null;
+    /**
+     *
+     * @param A, Point to measure from
+     * @param points
+     * @return index in Arraylist of closest point
+     */
+    public int closestPoint(ArrayList<Point> points){
+        Point currentPoint = null;
+        float closestDistance = 4000000.0f; //shame on me
+        int closestPoint = 0;
+
         for(int i=0; i < points.size(); i++){
-            A.distance(points.get(i));
+            currentPoint = points.get(i);
+            float currentDistance = this.distance(currentPoint);
+            if (currentDistance < closestDistance){
+                closestDistance= currentDistance;
+                closestPoint = i;
+//                System.out.println("current: " + currentDistance + " closest: " + closestDistance);
+            }
         }
-        return null;
+        return closestPoint;
     }
 
     public float getYLoc() {
@@ -57,12 +72,12 @@ public class Point {
     public void setXLoc(float x) {
         this.pos.x = x;
     }
-    
+
     public void setXY(float x, float y){
         this.pos.x = x;
         this.pos.y = y;
     }
-    
+
     public PVector getPos() {
 		return pos;
 	}

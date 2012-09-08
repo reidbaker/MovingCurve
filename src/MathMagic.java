@@ -19,5 +19,5 @@ public class MathMagic {
 		return PVector.add(a, PVector.mult(d, t));
 		// or PVector.add(PVector.mult(a, 1-t), PVector.mult(b,t));
 	}
-	
+
 }
