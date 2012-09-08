@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 
 public class Point {
@@ -28,6 +30,14 @@ public class Point {
         //TODO find midpoint between here and B
         System.out.println("Not Yet Implimented");
         return 0;
+    }
+
+    public Point closestPoint(Point A, ArrayList<Point> points){
+        Point currentClosest = null;
+        for(int i=0; i < points.size(); i++){
+            A.distance(points.get(i));
+        }
+        return null;
     }
 
     public float getYLoc() {
