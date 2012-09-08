@@ -10,8 +10,6 @@ public class MovingCurve extends PApplet {
     Point three = new Point(this, 100, 400);
     Point four = new Point(this, 100, 600);
     
-    public static PApplet p;
-
     private static final int GRAY = 88;
 
     public static void main(String[] args) {
@@ -26,7 +24,6 @@ public class MovingCurve extends PApplet {
         points.add(four);
         points.add(new Point(this, 600, 400));
         smooth();
-        p = this;
     }
 
     public void draw() {
