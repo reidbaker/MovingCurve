@@ -10,6 +10,7 @@ public class MovingCurve extends PApplet {
     Point three = new Point(this, 200, 400);
     Point four = new Point(this, 200, 500);
 
+    Point test = new Point(this, 400, 360);
     private static final int GRAY = 88;
 
     public static void main(String[] args) {
@@ -18,6 +19,7 @@ public class MovingCurve extends PApplet {
 
     public void setup() {
         size(800, 600);
+        frameRate(30);
         points.add(one);
         points.add(two);
         points.add(three);
